@@ -18,7 +18,7 @@ app.get("/", async () => {
 });
 // inicia o servidor
 app.listen({ port: Number(PORT), host: "0.0.0.0" })
-    .then(() => console.log(`🔥 Servidor rodando na porta ${PORT}`))
+    .then(() => console.log(` Servidor rodando na porta ${PORT}`))
     .catch(err => {
     console.error("Erro ao iniciar servidor:", err);
     process.exit(1);
