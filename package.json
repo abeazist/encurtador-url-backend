@@ -1,24 +1,13 @@
 {
   "name": "encurtador-url-backend",
+  "type": "module",
   "version": "1.0.0",
-  "description": "Desenvolvendo um encurtador de links com API RESTful em Node.js (Fastify), banco PostgreSQL e front-end em React. A aplicação deve permitir criar, editar e excluir links, avaliando integração front-end/back-end, modelagem de dados e boas práticas.",
-  "main": "index.js",
+  "description": "API RESTful de encurtador de links com Node.js (Fastify) e PostgreSQL.",
+  "main": "src/server.js",
   "scripts": {
-  "dev": "ts-node-dev src/server.ts",
-  "build": "tsc",
-  "start": "node dist/server.js"
-},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/abeazist/encurtador-url-backend.git"
+    "dev": "node src/server.js",
+    "start": "node src/server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/abeazist/encurtador-url-backend/issues"
-  },
-  "homepage": "https://github.com/abeazist/encurtador-url-backend#readme",
   "dependencies": {
     "@fastify/cors": "^11.1.0",
     "dotenv": "^17.2.3",
@@ -28,9 +17,7 @@
     "pg": "^8.16.3",
     "zod": "^4.1.12"
   },
-  "devDependencies": {
-    "@types/node": "^24.7.2",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.9.3"
-  }
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
