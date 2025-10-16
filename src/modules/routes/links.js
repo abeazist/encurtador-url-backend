@@ -32,3 +32,5 @@ export async function linkRoutes(fastify, options) {
     return controller.redirectToURL(request, reply);
   });
 }
+
+// socorro
