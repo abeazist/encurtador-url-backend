@@ -1,5 +1,5 @@
 // src/modules/repositories/link.repository.js
-import pool from '../../../infra/database.js';
+import pool from "../../infra/database.js";
 
 const LinkRepository = {
   async create({ codigo, legenda, url_original }) {

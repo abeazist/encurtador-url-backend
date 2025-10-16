@@ -2,6 +2,7 @@ import Fastify from "fastify";
 import cors from "@fastify/cors";
 import dotenv from "dotenv";
 import { criarTabelaLinks } from "./infra/schema.js";
+import { linkRoutes } from "./modules/routes/links.js";
 
 dotenv.config();
 
@@ -13,10 +14,12 @@ app.register(cors, {
 });
 
 
-app.get("/", async () => {
-  return { message: "API Encurtador de Links funcionando!" };
-});
+app.register(linkRoutes); 
 
+
+app.get("/", async () => {
+  return { message: "🚀 API Encurtador de Links funcionando!" };
+});
 
 app.listen({ port: Number(PORT), host: "0.0.0.0" })
   .then(async () => {
