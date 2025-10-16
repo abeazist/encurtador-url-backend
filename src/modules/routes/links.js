@@ -3,9 +3,9 @@ import LinkRepository from "../repositories/link.repository.js";
 import LinkService from "../services/service.js";
 import LinkController from "../controllers/link.controller.js";
 
-const repository = LinkRepository; // já é um objeto exportado
-const service = new LinkService(repository); // este sim é uma classe
-const controller = new LinkController(service); // idem
+const repository = LinkRepository; 
+const service = new LinkService(repository); 
+const controller = new LinkController(service); 
 
 export async function linkRoutes(fastify, options) {
   fastify.get("/api/links", async (request, reply) => {
