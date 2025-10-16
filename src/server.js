@@ -12,12 +12,12 @@ app.register(cors, {
   origin: [process.env.FRONTEND_URL || "*"],
 });
 
-// rota simples de teste
+
 app.get("/", async () => {
-  return { message: "🚀 API Encurtador de Links funcionando!" };
+  return { message: "API Encurtador de Links funcionando!" };
 });
 
-// inicia o servidor
+
 app.listen({ port: Number(PORT), host: "0.0.0.0" })
   .then(async () => {
     await criarTabelaLinks();
