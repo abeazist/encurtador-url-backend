@@ -15,4 +15,4 @@ export async function criarTabelaLinks() {
   console.log('Tabela "links" verificada/criada.');
 }
 
-export { criarTabelaLinks };
+// export { criarTabelaLinks };
