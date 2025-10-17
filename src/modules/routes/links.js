@@ -1,7 +1,7 @@
 // src/modules/routes/link.routes.js
 import LinkRepository from "../repositories/link.repository.js";
-import LinkService from "../services/service.js";
-import LinkController from "../controllers/link.controller.js";
+import {LinkService} from "../services/service.js";
+import {LinkController} from "../controllers/link.controller.js";
 
 const repository = LinkRepository; 
 const service = new LinkService(repository); 
