@@ -1,7 +1,6 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import dotenv from "dotenv";
-import { criarTabelaLinks } from "./infra/schema.js";
 import { linkRoutes } from "./modules/routes/links.js";
 
 dotenv.config();
@@ -23,7 +22,6 @@ app.get("/", async () => {
 
 app.listen({ port: Number(PORT), host: "0.0.0.0" })
   .then(async () => {
-    await criarTabelaLinks();
     console.log(`Tô rodando na porta ${PORT}`);
   })
   .catch(err => console.error(err));

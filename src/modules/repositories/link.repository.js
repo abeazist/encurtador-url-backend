@@ -1,58 +1,65 @@
 // src/modules/repositories/link.repository.js
-import pool from "../../infra/database.js";
+//repository vai falar com o BD atrav´s do drizzle que é um 
+import db from "../../infra/connection.js";
+import { eq } from 'drizzle-orm';
+import { links } from "../../infra/db/schema.js";
 
-const LinkRepository = {
-  async create({ codigo, legenda, url_original }) {
-    const result = await pool.query(
-      `INSERT INTO links (codigo, legenda, url_original)
-       VALUES ($1, $2, $3)
-       RETURNING *`,
-      [codigo, legenda, url_original]
-    );
-    return result.rows[0];
-  },
+export class LinkRepository {
+  constructor() {
+    this.db = db;
+    
+  }
+
 
   // listar todos
   async findAll() {
-    const result = await pool.query(`SELECT * FROM links ORDER BY id DESC`);
-    return result.rows;
-  },
+    return this.db.select().from(links);
+  }
 
   // buscar por id
-  async findById(id) {
-    const result = await pool.query(`SELECT * FROM links WHERE id = $1`, [id]);
-    return result.rows[0];
-  },
+ async findById(id) {
+    const result = await this.db.select().from(links).where(eq(links.id, id));
+    // Retorna o primeiro resultado ou null se não encontrar
+    return result[0] || null;
+  }
 
-  // buscar por código
-  async findByCodigo(codigo) {
-    const result = await pool.query(`SELECT * FROM links WHERE codigo = $1`, [codigo]);
-    return result.rows[0];
-  },
+  async create() {
+    const id = randomUUID();
+    const result = await this.db.insert(contatos).values({
+      id, // ID gerado automaticamente
+      ...contatoData, // Demais campos vindos do parâmetro
+    }).returning(); // Retorna o registro inserido
+    return result[0];
+  }
 
-  // atualiza
-  async update(id, { legenda, url_original }) {
-    const result = await pool.query(
-      `
-      UPDATE links
-      SET legenda = COALESCE($1, legenda),
-          url_original = COALESCE($2, url_original)
-      WHERE id = $3
-      RETURNING *
-      `,
-      [legenda, url_original, id]
-    );
-    return result.rows[0];
-  },
 
-  async delete(id) {
-    const result = await pool.query(`DELETE FROM links WHERE id = $1`, [id]);
-    return result.rowCount > 0;
-  },
+  // Atualiza os dados de um contato existente pelo ID
+  async update(id, contatoData) {
+    const result = await this.db.update(contatos)
+      .set(contatoData) // Define os novos valores
+      .where(eq(contatos.id, id)) // Filtra pelo ID
+      .returning(); // Retorna o registro atualizado
+    return result[0] || null;
+  }
 
-  async incrementarClicks(id) {
-    await pool.query(`UPDATE links SET clicks = clicks + 1 WHERE id = $1`, [id]);
-  },
+
+  // Remove um contato do banco pelo ID
+  // Retorna true se algum registro foi deletado, false caso contrário
+  async remove(id) {
+    const result = await this.db.delete(contatos)
+      .where(eq(contatos.id, id))
+      .returning({ id: contatos.id }); // Pede o ID do item deletado de volta
+
+    return result.length > 0;
+  }
+
+  // Busca um contato pelo e-mail (útil para evitar duplicidade)
+  async findByEmail(email) {
+    const result = await this.db.select().from(contatos).where(eq(contatos.email, email));
+    return result[0] || null;
+  }
+
+ 
 };
 
 export default LinkRepository;
