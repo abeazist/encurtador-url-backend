@@ -8,20 +8,21 @@ dotenv.config();
 const app = Fastify();
 const PORT = process.env.PORT || 3000;
 
-app.register(cors, {
-  origin: [process.env.FRONTEND_URL || "*"],
+
+await app.register(cors, {
+  origin: ["http://localhost:5173"], // permite o frontend local
+  methods: ["GET", "POST", "PUT", "DELETE"],
 });
-
-
-app.register(linkRoutes); 
 
 
 app.get("/", async () => {
-  return { message: "🚀 API Encurtador de Links funcionando!" };
+  return { message: "API Encurtador de Links funcionando!" };
 });
 
-app.listen({ port: Number(PORT), host: "0.0.0.0" })
-  .then(async () => {
-    console.log(`Tô rodando na porta ${PORT}`);
-  })
-  .catch(err => console.error(err));
+
+app.register(linkRoutes);
+
+app.listen({ port: PORT }, (err, PORT) => {
+  if (err) throw err;
+  console.log(`Servidor rodando em ${PORT}`);
+});

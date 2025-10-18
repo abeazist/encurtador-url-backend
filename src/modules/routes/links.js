@@ -3,7 +3,7 @@ import LinkRepository from "../repositories/link.repository.js";
 import {LinkService} from "../services/service.js";
 import {LinkController} from "../controllers/link.controller.js";
 
-const repository = LinkRepository; 
+const repository = new LinkRepository(); 
 const service = new LinkService(repository); 
 const controller = new LinkController(service); 
 
