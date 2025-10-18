@@ -21,6 +21,7 @@ export class LinkService {
       legenda,
     });
 
+    console.log(novoLink)
     return novoLink;
   }
 
