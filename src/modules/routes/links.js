@@ -28,8 +28,13 @@ export async function linkRoutes(fastify, options) {
     return controller.updateLink(request, reply);
   });
 
-  fastify.get("/:code", async (request, reply) => {
-    return controller.redirectToURL(request, reply);
-  });
+//  fastify.get("/:code", async (request, reply) => {
+//    return controller.redirectToURL(request, reply);
+//  });
+
+fastify.get("/:code", async (request, reply) => {
+    return controller.redirectLink(request, reply);
+});
+
 }
 
