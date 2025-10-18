@@ -3,14 +3,16 @@ export class LinkController {
         this.service = service;
     }
 
-    isValidUrl(url) {
-        try {
-            new URL(url);
-            return true;
-        } catch (err) {
-            return false;
-        }
-    }
+isValidUrl(url) {
+    if (!url) return false;             // existe algo?
+    if (url.includes(" ")) return false; // não pode ter espaço
+    if (!url.includes(".")) return false; // precisa ter ponto
+
+    const parts = url.split(".");
+    if (parts.some(part => part === "")) return false; // ponto no começo/fim ou duplicado
+    return true;
+}
+
 
     async getLink(request, reply) {
         const links = await this.service.getAllLinks();
