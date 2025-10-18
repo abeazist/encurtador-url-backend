@@ -5,13 +5,13 @@ export class LinkController {
 
 
     async getLink(request, reply) {
-        const links = this.service.getAllLinks();
+        const links = await this.service.getAllLinks();
         return reply.send(links);
     }
 
     async getLinkById(request, reply) {
         const { id } = request.params;
-        const link = this.service.getLinkById(id);
+        const link = await this.service.getLinkById(id);
 
         if (!link) {
             return reply.code(404).send({ message: "Link não encontrado" });
@@ -21,14 +21,27 @@ export class LinkController {
     }
 
     async createLink(request, reply) {
-        const { url_original, legenda } = request.body
-        const novoLink = this.service.createLink({ url_original, legenda });
-        return reply.code(201).send(novoLink);
+        const { url_original, legenda } = request.body;
+
+        try {
+            const novoLink = await this.service.createLink({
+                urlOriginal: url_original, // ⚠️ atenção ao nome
+                legenda,
+            });
+            return reply.code(201).send(novoLink);
+        } catch (error) {
+            console.error("Erro ao criar link:", error); // 👈 aqui você verá o erro real no terminal
+            return reply.code(500).send({ message: "Erro ao criar link" });
+        }
+        // const { url_original, legenda } = request.body
+        // const novoLink = await this.service.createLink({ urlOriginal: url_original, legenda });
+        // return reply.code(201).send(novoLink);
+
     }
 
     async updateLink(request, reply) {
         const { id } = request.params;
-        const linkAtualizado = this.service.updateLink(
+        const linkAtualizado = await this.service.updateLink(
             id,
             request.body
         );
@@ -41,23 +54,23 @@ export class LinkController {
 
     async deleteLink(request, reply) {
         const { id } = request.params
-        const sucesso = this.service.deleteLink(id);
+        const sucesso = await this.service.deleteLink(id);
         if (!sucesso) {
             return reply.code(404).send({ message: "Contato não encontrado" });
         }
         return reply.code(204).send();
-    
-}
 
-    async redirectLink(request, reply) {
-    const { codigo } = request.params
-    const url_original = await this.service.getUrlOriginal(codigo);
-
-    if (!url_original) {
-        return reply.code(404).send({ message: "Link não encontrado" });
     }
 
-    return reply.status(302).redirect(url_original);
-}
+    async redirectLink(request, reply) {
+        const { codigo } = request.params
+        const url_original = await this.service.getUrlOriginal(codigo);
+
+        if (!url_original) {
+            return reply.code(404).send({ message: "Link não encontrado" });
+        }
+
+        return reply.status(302).redirect(url_original);
+    }
 
 }

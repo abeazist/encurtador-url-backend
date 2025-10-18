@@ -17,7 +17,7 @@ export class LinkService {
 
     const novoLink = await this.linkRepository.create({
       idLinkEncurtado,
-      urlOriginal: urlOriginal, 
+      urlOriginal, 
       legenda,
     });
 
