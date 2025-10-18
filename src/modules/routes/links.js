@@ -9,7 +9,7 @@ const controller = new LinkController(service);
 
 export async function linkRoutes(fastify, options) {
   fastify.get("/api/links", async (request, reply) => {
-    return controller.getLinks(request, reply);
+    return controller.getLink(request, reply);
   });
 
   fastify.post("/api/links", async (request, reply) => {

@@ -11,13 +11,13 @@ export class LinkService {
     return await this.linkRepository.findById(id);
   }
 
-  async createLink({ url_original, legenda }) {
+  async createLink({ urlOriginal, legenda }) {
     // Gera o código curto para idLinkEncurtado
     const idLinkEncurtado = this.gerarCodigoEncurtado(6);
 
     const novoLink = await this.linkRepository.create({
       idLinkEncurtado,
-      urlOriginal: url_original, // mapeia para o nome do campo do banco
+      urlOriginal: urlOriginal, 
       legenda,
     });
 
@@ -40,8 +40,14 @@ export class LinkService {
     return link ? link.urlOriginal : null;
   }
 
-  async gerarCodigoEncurtado(){
-    
+  gerarCodigoEncurtado(tamanho = 6) {
+  const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let resultado = '';
+  for (let i = 0; i < tamanho; i++) {
+    resultado += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
   }
+  return resultado;
+}
+
 }
 
