@@ -1,6 +1,6 @@
 {
-  "id": "00000000-0000-0000-0000-000000000000",
-  "prevId": "",
+  "id": "cdbb6db3-d026-49ac-8133-7d2259fecb86",
+  "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -14,9 +14,9 @@
           "primaryKey": true,
           "notNull": true
         },
-        "codigo": {
-          "name": "codigo",
-          "type": "varchar(10)",
+        "idLinkEncurtado": {
+          "name": "idLinkEncurtado",
+          "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
@@ -24,23 +24,16 @@
           "name": "legenda",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
-        "url_original": {
-          "name": "url_original",
-          "type": "text",
+        "urlOriginal": {
+          "name": "urlOriginal",
+          "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
-        "clicks": {
-          "name": "clicks",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "default": 0
-        },
-        "created_at": {
-          "name": "created_at",
+        "dataCriacao": {
+          "name": "dataCriacao",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false,
@@ -50,17 +43,9 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "links_codigo_key": {
-          "columns": [
-            "codigo"
-          ],
-          "nullsNotDistinct": false,
-          "name": "links_codigo_key"
-        }
-      },
-      "checkConstraints": {},
+      "uniqueConstraints": {},
       "policies": {},
+      "checkConstraints": {},
       "isRLSEnabled": false
     }
   },
@@ -71,11 +56,8 @@
   "policies": {},
   "views": {},
   "_meta": {
+    "columns": {},
     "schemas": {},
-    "tables": {},
-    "columns": {}
-  },
-  "internal": {
     "tables": {}
   }
 }
