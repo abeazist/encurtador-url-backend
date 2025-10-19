@@ -1,15 +1,20 @@
-import db from "./src/infra/connection.js";
-import { users } from "./src/infra/db/schema.js"; // ajuste o caminho conforme seu schema
+import pg from "pg";
+import dotenv from "dotenv";
+dotenv.config();
 
-async function testConnection() {
-  try {
-    // Apenas para ver se o banco responde
-    const result = await db.select().from(users).limit(1);
-    console.log("✅ Conexão com Drizzle funcionando!");
-    console.log(result);
-  } catch (error) {
-    console.error(" Erro ao testar Drizzle:", error);
-  }
-}
+const { Pool } = pg;
 
-testConnection();
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+});
+
+pool
+  .connect()
+  .then(() => {
+    console.log("✅ Conectado ao banco Render com sucesso!");
+    return pool.end();
+  })
+  .catch((err) => {
+    console.error("❌ Erro de conexão:", err);
+  });
