@@ -5,5 +5,5 @@ export const links = pgTable("links", {
   idLinkEncurtado: varchar("idLinkEncurtado", { length: 255 }).notNull(),
   legenda: varchar("legenda", { length: 255 }).notNull(),
   urlOriginal: varchar("urlOriginal", { length: 255 }).notNull(),
-  dataCriacao: timestamp("data_criacao", { mode: "string" }).defaultNow(),
+  dataCriacao: timestamp("dataCriacao", { mode: "string" }).defaultNow(),
 });

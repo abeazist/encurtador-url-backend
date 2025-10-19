@@ -1,5 +1,5 @@
 {
-  "id": "518356d3-1bf4-40be-a5b8-44e23f91ec26",
+  "id": "88083e61-3234-48bf-a259-e72b35338f5e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -14,8 +14,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "codigo": {
-          "name": "codigo",
+        "idLinkEncurtado": {
+          "name": "idLinkEncurtado",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
@@ -26,14 +26,14 @@
           "primaryKey": false,
           "notNull": true
         },
-        "url_original": {
-          "name": "url_original",
+        "urlOriginal": {
+          "name": "urlOriginal",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
-        "data_criacao": {
-          "name": "data_criacao",
+        "dataCriacao": {
+          "name": "dataCriacao",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false,
