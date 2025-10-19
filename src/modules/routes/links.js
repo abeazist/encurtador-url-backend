@@ -18,7 +18,7 @@ export async function linkRoutes(fastify, options) {
       if (!link) {
         return reply.code(404).send("Não encontrado");
       }
-      await LinkRepository.incrementClicks(link.id);
+      await LinkRepository.incrementarClicks(link.id);
 
       reply.redirect(link.url_original);
     });

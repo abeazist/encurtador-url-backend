@@ -102,11 +102,14 @@ async createLink(request, reply) {
         const { idLinkEncurtado } = request.params
         const urlOriginal = await this.service.getUrlOriginal(idLinkEncurtado);
 
+        await this.service.incrementarClicks(idLinkEncurtado);
+
         if (!urlOriginal) {
             return reply.code(404).send({ message: "Link não encontrado" });
         }
 
         return reply.status(302).redirect(urlOriginal);
     }
+
 
 }

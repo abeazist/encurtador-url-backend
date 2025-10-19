@@ -17,7 +17,7 @@ export class LinkService {
 
     const novoLink = await this.linkRepository.create({
       idLinkEncurtado,
-      urlOriginal, 
+      urlOriginal,
       legenda,
     });
 
@@ -42,13 +42,22 @@ export class LinkService {
   }
 
   gerarCodigoEncurtado(tamanho = 6) {
-  const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let resultado = '';
-  for (let i = 0; i < tamanho; i++) {
-    resultado += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let resultado = '';
+    for (let i = 0; i < tamanho; i++) {
+      resultado += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+    }
+    return resultado;
   }
-  return resultado;
-}
+
+  async incrementarClicks(idLinkEncurtado) {
+    const link = await this.linkRepository.getLinkById(idLinkEncurtado);
+    if (!link) {
+      throw new Error("Link não encontrado");
+    }
+    link.numCliques += 1;
+    await this.linkRepository.update(link.id, link);
+  }
 
 }
 
