@@ -99,8 +99,8 @@ async createLink(request, reply) {
     }
 
     async redirectLink(request, reply) {
-        const { codigo } = request.params
-        const urlOriginal = await this.service.getUrlOriginal(codigo);
+        const { idLinkEncurtado } = request.params
+        const urlOriginal = await this.service.getUrlOriginal(idLinkEncurtado);
 
         if (!urlOriginal) {
             return reply.code(404).send({ message: "Link não encontrado" });
