@@ -1,4 +1,4 @@
-import { pgTable, serial, varchar, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, serial, varchar, timestamp, number } from "drizzle-orm/pg-core";
 
 export const links = pgTable("links", {
   id: serial("id").primaryKey(),
@@ -6,4 +6,5 @@ export const links = pgTable("links", {
   legenda: varchar("legenda", { length: 255 }).notNull(),
   urlOriginal: varchar("urlOriginal", { length: 255 }).notNull(),
   dataCriacao: timestamp("dataCriacao", { mode: "string" }).defaultNow(),
+  clicks: number("clicks").notNull(),
 });

@@ -19,16 +19,16 @@ export class LinkRepository {
   async create({ idLinkEncurtado, urlOriginal, legenda }) {
     const result = await this.db
       .insert(links)
-      .values({ idLinkEncurtado, urlOriginal, legenda })
+      .values({ idLinkEncurtado, urlOriginal, legenda, numCliques:0 })
       .returning();
 
     return result[0];
   }
 
-  async update(id, { urlOriginal, legenda }) {
+  async update(id, { urlOriginal, legenda, numCliques }) {
     const result = await this.db
       .update(links)
-      .set({ urlOriginal, legenda })
+      .set({ urlOriginal, legenda, numCliques })
       .where(eq(links.id, id))
       .returning();
 
@@ -53,7 +53,7 @@ export class LinkRepository {
     return result[0] || null;
   }
 
-  async incrementClicks(id) {
+  async incrementarClicks(id) {
     await this.db.none("UPDATE links SET clicks = clicks + 1 WHERE id = $1", [id]);
   }
 }

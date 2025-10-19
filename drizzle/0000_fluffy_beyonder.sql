@@ -3,5 +3,6 @@ CREATE TABLE "links" (
 	"idLinkEncurtado" varchar(255) NOT NULL,
 	"legenda" varchar(255) NOT NULL,
 	"urlOriginal" varchar(255) NOT NULL,
-	"dataCriacao" timestamp DEFAULT now()
+	"dataCriacao" timestamp DEFAULT now(),
+	"clicks" number NOT NULL
 );
