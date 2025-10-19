@@ -32,11 +32,11 @@ isValidUrl(url) {
 
    
   //  async createLink(request, reply) {
-    //    const { url_original, legenda } = request.body;
+    //    const { urlOriginal, legenda } = request.body;
 
     //    try {
     //        const novoLink = await this.service.createLink({
-    //            urlOriginal: url_original, // ⚠️ atenção ao nome
+    //            urlOriginal: urlOriginal, // ⚠️ atenção ao nome
    //             legenda,
     //        });
     //        return reply.code(201).send(novoLink);
@@ -44,18 +44,18 @@ isValidUrl(url) {
     //        console.error("Erro ao criar link:", error); // 👈 aqui você verá o erro real no terminal
     //        return reply.code(500).send({ message: "Erro ao criar link" });
     //    }
-        // const { url_original, legenda } = request.body
-        // const novoLink = await this.service.createLink({ urlOriginal: url_original, legenda });
+        // const { urlOriginal, legenda } = request.body
+        // const novoLink = await this.service.createLink({ urlOriginal: urlOriginal, legenda });
         // return reply.code(201).send(novoLink);
 
     //}
 
 
 async createLink(request, reply) {
-        const { url_original, legenda } = request.body;
+        const { urlOriginal, legenda } = request.body;
 
         // Testando validação url
-        if (!this.isValidUrl(url_original)) {
+        if (!this.isValidUrl(urlOriginal)) {
             return reply.code(400).send({
                 message: "URL inválida. Use um formato válido, ex: https://exemplo.com"
             });
@@ -63,7 +63,7 @@ async createLink(request, reply) {
 
         try {
             const novoLink = await this.service.createLink({
-                urlOriginal: url_original,
+                urlOriginal: urlOriginal,
                 legenda,
             });
             return reply.code(201).send(novoLink);
@@ -100,13 +100,13 @@ async createLink(request, reply) {
 
     async redirectLink(request, reply) {
         const { codigo } = request.params
-        const url_original = await this.service.getUrlOriginal(codigo);
+        const urlOriginal = await this.service.getUrlOriginal(codigo);
 
-        if (!url_original) {
+        if (!urlOriginal) {
             return reply.code(404).send({ message: "Link não encontrado" });
         }
 
-        return reply.status(302).redirect(url_original);
+        return reply.status(302).redirect(urlOriginal);
     }
 
 }

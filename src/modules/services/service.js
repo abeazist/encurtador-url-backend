@@ -25,9 +25,9 @@ export class LinkService {
     return novoLink;
   }
 
-  async updateLink(id, { url_original, legenda }) {
+  async updateLink(id, { urlOriginal, legenda }) {
     return await this.linkRepository.update(id, {
-      urlOriginal: url_original,
+      urlOriginal: urlOriginal,
       legenda,
     });
   }
