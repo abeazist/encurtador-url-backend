@@ -52,6 +52,10 @@ export class LinkRepository {
 
     return result[0] || null;
   }
+
+  async incrementClicks(id) {
+    await this.db.none("UPDATE links SET clicks = clicks + 1 WHERE id = $1", [id]);
+  }
 }
 
 export default LinkRepository;

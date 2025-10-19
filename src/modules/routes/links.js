@@ -12,6 +12,17 @@ export async function linkRoutes(fastify, options) {
     return controller.getLink(request, reply);
   });
 
+  fastify.get("/:idLinkEncurtado", async (request, reply) => {
+    const { idLinkEncurtado } = request.params;
+    const link = await linkRepository.findByIdEncurtado(idLinkEncurtado);
+      if (!link) {
+        return reply.code(404).send("Não encontrado");
+      }
+      await LinkRepository.incrementClicks(link.id);
+
+      reply.redirect(link.url_original);
+    });
+
   fastify.post("/api/links", async (request, reply) => {
     return controller.createLink(request, reply);
   });
@@ -32,9 +43,9 @@ export async function linkRoutes(fastify, options) {
 //    return controller.redirectToURL(request, reply);
 //  });
 
-fastify.get("/:code", async (request, reply) => {
-    return controller.redirectLink(request, reply);
-});
+// fastify.get("/:code", async (request, reply) => {
+//     return controller.redirectLink(request, reply);
+// });
 
 }
 
