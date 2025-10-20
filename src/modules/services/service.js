@@ -19,6 +19,7 @@ export class LinkService {
       idLinkEncurtado,
       urlOriginal,
       legenda,
+      numCliques: 0,
     });
 
     console.log(novoLink)
