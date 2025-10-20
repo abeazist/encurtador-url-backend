@@ -51,7 +51,7 @@ export class LinkService {
   }
 
   async incrementarClicks(idLinkEncurtado) {
-    const link = await this.linkRepository.getLinkById(idLinkEncurtado);
+    const link = await this.linkRepository.findById(idLinkEncurtado);
     if (!link) {
       throw new Error("Link não encontrado");
     }
