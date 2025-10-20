@@ -4,5 +4,5 @@ CREATE TABLE "links" (
 	"legenda" varchar(255) NOT NULL,
 	"urlOriginal" varchar(255) NOT NULL,
 	"dataCriacao" timestamp DEFAULT now(),
-	"clicks" number NOT NULL
+	"num_cliques" INTEGER DEFAULT 0 NOT NULL
 );

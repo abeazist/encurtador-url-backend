@@ -6,5 +6,5 @@ export const links = pgTable("links", {
   legenda: varchar("legenda", { length: 255 }).notNull(),
   urlOriginal: varchar("urlOriginal", { length: 255 }).notNull(),
   dataCriacao: timestamp("dataCriacao", { mode: "string" }).defaultNow(),
-  clicks: numeric("clicks").notNull(),
+  numCliques: integer("num_cliques").default(0).notNull(),
 });
