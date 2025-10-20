@@ -1,3 +1,4 @@
+// regras de negócio
 export class LinkService {
   constructor(linkRepository) {
     this.linkRepository = linkRepository;

@@ -1,3 +1,4 @@
+// intermediário entre rota e lógica de negócio
 export class LinkController {
     constructor(service) {
         this.service = service;
@@ -36,12 +37,12 @@ isValidUrl(url) {
 
     //    try {
     //        const novoLink = await this.service.createLink({
-    //            urlOriginal: urlOriginal, // ⚠️ atenção ao nome
+    //            urlOriginal: urlOriginal, // atenção ao nome
    //             legenda,
     //        });
     //        return reply.code(201).send(novoLink);
     //    } catch (error) {
-    //        console.error("Erro ao criar link:", error); // 👈 aqui você verá o erro real no terminal
+    //        console.error("Erro ao criar link:", error); //  aqui você verá o erro real no terminal
     //        return reply.code(500).send({ message: "Erro ao criar link" });
     //    }
         // const { urlOriginal, legenda } = request.body
