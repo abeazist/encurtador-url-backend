@@ -16,24 +16,21 @@ export class LinkRepository {
     return result[0] || null;
   }
 
+  async findByIdLinkEncurtado(idLinkEncurtado) {
+    const result = await this.db
+      .select()
+      .from(links)
+      .where(eq(links.idLinkEncurtado, idLinkEncurtado));
+    return result[0] || null;
+  }
+
   async create({ idLinkEncurtado, urlOriginal, legenda }) {
     const result = await this.db
       .insert(links)
-      .values({ idLinkEncurtado, urlOriginal, legenda, numCliques:0 })
+      .values({ idLinkEncurtado, urlOriginal, legenda, numCliques: 0 })
       .returning();
-
     return result[0];
   }
-
-  async findByIdLinkEncurtado(idLinkEncurtado) {
-  const result = await db
-    .select()
-    .from(links)
-    .where(eq(links.idLinkEncurtado, idLinkEncurtado));
-
-  return result[0];
-}
-
 
   async update(id, { urlOriginal, legenda, numCliques }) {
     const result = await this.db
@@ -41,29 +38,16 @@ export class LinkRepository {
       .set({ urlOriginal, legenda, numCliques })
       .where(eq(links.id, id))
       .returning();
-
     return result[0] || null;
-}
-
+  }
 
   async remove(id) {
     const result = await this.db
       .delete(links)
       .where(eq(links.id, id))
       .returning({ id: links.id });
-
     return result.length > 0;
   }
-
-  async findByIdLinkEncurtado(idLinkEncurtado) {
-    const result = await this.db
-      .select()
-      .from(links)
-      .where(eq(links.idLinkEncurtado, idLinkEncurtado));
-
-    return result[0] || null;
-  }
-
 }
 
 export default LinkRepository;

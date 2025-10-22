@@ -1,4 +1,3 @@
-// regras de negócio
 export class LinkService {
   constructor(linkRepository) {
     this.linkRepository = linkRepository;
@@ -13,39 +12,45 @@ export class LinkService {
   }
 
   async getLinkByIdEncurtado(idLinkEncurtado) {
-  return await this.linkRepository.findByIdLinkEncurtado(idLinkEncurtado);
-}
+    return await this.linkRepository.findByIdLinkEncurtado(idLinkEncurtado);
+  }
 
-  
   async createLink({ urlOriginal, legenda }) {
-    // Gera o código curto para idLinkEncurtado
     const idLinkEncurtado = this.gerarCodigoEncurtado(6);
-
     const novoLink = await this.linkRepository.create({
       idLinkEncurtado,
       urlOriginal,
       legenda,
-      numCliques: 0,
     });
-
-    console.log(novoLink)
     return novoLink;
-  }
-
-  async updateLink(id, { urlOriginal, legenda }) {
-    return await this.linkRepository.update(id, {
-      urlOriginal: urlOriginal,
-      legenda,
-    });
-  }
-
-  async deleteLink(id) {
-    return await this.linkRepository.remove(id);
   }
 
   async getUrlOriginal(idLinkEncurtado) {
     const link = await this.linkRepository.findByIdLinkEncurtado(idLinkEncurtado);
     return link ? link.urlOriginal : null;
+  }
+
+  async incrementarClicks(idLinkEncurtado) {
+    const link = await this.linkRepository.findByIdLinkEncurtado(idLinkEncurtado);
+    if (!link) throw new Error("Link não encontrado");
+
+    const novoNumCliques = (link.numCliques || 0) + 1;
+
+    await this.linkRepository.update(link.id, {
+      urlOriginal: link.urlOriginal,
+      legenda: link.legenda,
+      numCliques: novoNumCliques,
+    });
+
+    console.log(`Link ${link.idLinkEncurtado} agora tem ${novoNumCliques} cliques.`);
+  }
+
+  async updateLink(id, { urlOriginal, legenda }) {
+    return await this.linkRepository.update(id, { urlOriginal, legenda });
+  }
+
+  async deleteLink(id) {
+    return await this.linkRepository.remove(id);
   }
 
   gerarCodigoEncurtado(tamanho = 6) {
@@ -56,22 +61,4 @@ export class LinkService {
     }
     return resultado;
   }
-
-  async incrementarClicks(idLinkEncurtado) {
-    const link = await this.linkRepository.findByIdLinkEncurtado(idLinkEncurtado);
-    if (!link) throw new Error("Link não encontrado");
-
-    
-    const novoNumCliques = (link.numCliques || 0) + 1;
-
-   
-    await this.linkRepository.update(link.id, {
-        urlOriginal: link.urlOriginal,
-        legenda: link.legenda,
-        numCliques: novoNumCliques
-    });
 }
-
-
-}
-
