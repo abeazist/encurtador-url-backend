@@ -14,7 +14,7 @@ export async function linkRoutes(fastify, options) {
 
   fastify.get("/:idLinkEncurtado", async (request, reply) => {
     const { idLinkEncurtado } = request.params;
-    const link = await linkRepository.findByIdEncurtado(idLinkEncurtado);
+    const link = await LinkRepository.findByIdEncurtado(idLinkEncurtado);
       if (!link) {
         return reply.code(404).send("Não encontrado");
       }
@@ -22,6 +22,9 @@ export async function linkRoutes(fastify, options) {
 
       reply.redirect(link.url_original);
     });
+
+
+    
 
   fastify.post("/api/links", async (request, reply) => {
     return controller.createLink(request, reply);

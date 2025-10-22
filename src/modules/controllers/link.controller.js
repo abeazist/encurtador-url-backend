@@ -14,6 +14,10 @@ isValidUrl(url) {
     return true;
 }
 
+    async getLinkByIdEncurtado(idLinkEncurtado) {
+        return await this.linkService.getLinkByIdEncurtado(idLinkEncurtado);
+    }
+
 
     async getLink(request, reply) {
         const links = await this.service.getAllLinks();

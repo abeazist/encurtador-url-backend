@@ -12,6 +12,11 @@ export class LinkService {
     return await this.linkRepository.findById(id);
   }
 
+  async getLinkByIdEncurtado(idLinkEncurtado) {
+  return await this.linkRepository.findByIdLinkEncurtado(idLinkEncurtado);
+}
+
+  
   async createLink({ urlOriginal, legenda }) {
     // Gera o código curto para idLinkEncurtado
     const idLinkEncurtado = this.gerarCodigoEncurtado(6);

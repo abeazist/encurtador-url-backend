@@ -25,6 +25,16 @@ export class LinkRepository {
     return result[0];
   }
 
+  async findByIdLinkEncurtado(idLinkEncurtado) {
+  const result = await db
+    .select()
+    .from(links)
+    .where(eq(links.idLinkEncurtado, idLinkEncurtado));
+
+  return result[0];
+}
+
+
   async update(id, { urlOriginal, legenda, numCliques }) {
     const result = await this.db
       .update(links)
