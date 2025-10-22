@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 
 await app.register(cors, {
-  origin: ["http://localhost:5173"], // permite o frontend local
+  origin: "https://encurtador-url-frontend-dun.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE"],
 });
 

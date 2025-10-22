@@ -35,7 +35,7 @@ export class LinkController {
       const novoLink = await this.service.createLink({ urlOriginal, legenda });
 
       // Adiciona domínio do seu servidor
-      const dominio = "https://meuencurtador.onrender.com"; // altere para o seu domínio
+      const dominio = "https://encurtador-url-frontend-dun.vercel.app/"; 
       const linkCurto = `${dominio}/${novoLink.idLinkEncurtado}`;
 
       return reply.code(201).send({ ...novoLink, linkCurto });
