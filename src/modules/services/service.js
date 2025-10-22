@@ -61,8 +61,15 @@ export class LinkService {
     const link = await this.linkRepository.findByIdLinkEncurtado(idLinkEncurtado);
     if (!link) throw new Error("Link não encontrado");
 
-    link.numCliques += 1;
-    await this.linkRepository.update(link.id, link);
+    
+    const novoNumCliques = (link.numCliques || 0) + 1;
+
+   
+    await this.linkRepository.update(link.id, {
+        urlOriginal: link.urlOriginal,
+        legenda: link.legenda,
+        numCliques: novoNumCliques
+    });
 }
 
 

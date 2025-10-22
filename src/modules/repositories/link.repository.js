@@ -43,7 +43,8 @@ export class LinkRepository {
       .returning();
 
     return result[0] || null;
-  }
+}
+
 
   async remove(id) {
     const result = await this.db
