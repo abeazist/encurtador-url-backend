@@ -1,39 +1,28 @@
-// src/modules/routes/link.routes.js
 import LinkRepository from "../repositories/link.repository.js";
-import {LinkService} from "../services/service.js";
-import {LinkController} from "../controllers/link.controller.js";
+import { LinkService } from "../services/service.js";
+import { LinkController } from "../controllers/link.controller.js";
 
-const repository = new LinkRepository(); 
-const service = new LinkService(repository); 
-const controller = new LinkController(service); 
+const repository = new LinkRepository();
+const service = new LinkService(repository);
+const controller = new LinkController(service);
 
 export async function linkRoutes(fastify, options) {
+  // Listar todos os links
   fastify.get("/api/links", async (request, reply) => {
     return controller.getLink(request, reply);
   });
 
-  fastify.get("/:idLinkEncurtado", async (request, reply) => {
-    const { idLinkEncurtado } = request.params;
-    const link = await LinkRepository.findByIdEncurtado(idLinkEncurtado);
-      if (!link) {
-        return reply.code(404).send("Não encontrado");
-      }
-      await LinkRepository.incrementarClicks(link.id);
-
-      reply.redirect(link.url_original);
-    });
-
-
-    
-
+  // Criar link
   fastify.post("/api/links", async (request, reply) => {
     return controller.createLink(request, reply);
   });
 
-  fastify.delete("/api/links/:id", async (request, reply) => {
-    return controller.deleteLink(request, reply);
+  // Redirecionar link encurtado
+  fastify.get("/:idLinkEncurtado", async (request, reply) => {
+    return controller.redirectLink(request, reply);
   });
 
+  // CRUD
   fastify.get("/api/links/:id", async (request, reply) => {
     return controller.getLinkById(request, reply);
   });
@@ -42,13 +31,7 @@ export async function linkRoutes(fastify, options) {
     return controller.updateLink(request, reply);
   });
 
-//  fastify.get("/:code", async (request, reply) => {
-//    return controller.redirectToURL(request, reply);
-//  });
-
-// fastify.get("/:code", async (request, reply) => {
-//     return controller.redirectLink(request, reply);
-// });
-
+  fastify.delete("/api/links/:id", async (request, reply) => {
+    return controller.deleteLink(request, reply);
+  });
 }
-

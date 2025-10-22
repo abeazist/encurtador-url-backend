@@ -66,9 +66,3 @@ export class LinkRepository {
 }
 
 export default LinkRepository;
-
-//- *Service (Serviço):* Assume a responsabilidade da *lógica de negócio*. Se você precisa validar um e-mail, 
-//verificar permissões ou enviar uma notificação, é aqui que essa lógica vive. O Serviço não sabe como o banco de dados funciona, ele apenas delega.
-//- *Repository (Repositório):* Assume a responsabilidade do *acesso a dados*. É a única camada que sabe "falar" com o banco de dados, seja com SQL puro ou com um ORM. 
-// O Controller também é atualizado. Agora ele depende do Service. Assim como o Service, 
-// seu construtor cria sua própria dependência, o ContatoService, mantendo o acoplamento forte.

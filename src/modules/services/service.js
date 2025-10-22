@@ -58,13 +58,13 @@ export class LinkService {
   }
 
   async incrementarClicks(idLinkEncurtado) {
-    const link = await this.linkRepository.findById(idLinkEncurtado);
-    if (!link) {
-      throw new Error("Link não encontrado");
-    }
+    const link = await this.linkRepository.findByIdLinkEncurtado(idLinkEncurtado);
+    if (!link) throw new Error("Link não encontrado");
+
     link.numCliques += 1;
     await this.linkRepository.update(link.id, link);
-  }
+}
+
 
 }
 
