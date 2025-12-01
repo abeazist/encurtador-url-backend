@@ -6,7 +6,8 @@
   "main": "src/server.js",
   "scripts": {
     "dev": "node src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "build": "echo 'Nothing to build'"
   },
   "dependencies": {
     "@fastify/cors": "^11.1.0",
