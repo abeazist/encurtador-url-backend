@@ -19,5 +19,5 @@ app.get("/", async () => {
 
 app.register(linkRoutes);
 
-await app.listen({ port: PORT, host: "0.0.0.0" });
+await app.listen({ port: process.env.PORT, host: "0.0.0.0" });
 console.log(`Servidor rodandinho em http://0.0.0.0:${PORT}`);
