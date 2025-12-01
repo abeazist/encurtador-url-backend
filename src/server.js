@@ -9,9 +9,13 @@ const app = Fastify();
 const PORT = process.env.PORT || 8000;
 
 await app.register(cors, {
-  origin: "https://encurtador-url-frontend-dun.vercel.app",
+  origin: [
+    "https://encurtador-url-frontend-dun.vercel.app",
+    "https://encurtador-url-frontend-7rv3reqos-beatrizs-projects-d3f5406d.vercel.app"
+  ],
   methods: ["GET", "POST", "PUT", "DELETE"],
 });
+
 
 app.get("/", async () => {
   return { message: "API Encurtador de Links funcionando!" };
