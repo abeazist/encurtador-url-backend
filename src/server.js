@@ -7,7 +7,7 @@ import { linkRoutes } from "./modules/routes/links.js";
 dotenv.config();
 
 const app = Fastify();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 
 await app.register(cors, {
