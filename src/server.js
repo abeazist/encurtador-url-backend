@@ -9,10 +9,7 @@ const app = Fastify();
 const PORT = process.env.PORT || 8000;
 
 await app.register(cors, {
-  origin: [
-    "https://encurtador-url-frontend-dun.vercel.app",
-    "https://encurtador-url-frontend-7rv3reqos-beatrizs-projects-d3f5406d.vercel.app"
-  ],
+  origin: ["*"],
   methods: ["GET", "POST", "PUT", "DELETE"],
 });
 
