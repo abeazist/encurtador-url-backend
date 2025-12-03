@@ -13,6 +13,16 @@ await app.register(cors, {
   methods: ["GET", "POST", "PUT", "DELETE"],
 });
 
+// Global hook that adds CORS headers to every response. This covers
+// environments where the Fastify CORS plugin may not be applied
+// (for example some serverless runtimes or edge proxies).
+app.addHook('onSend', async (request, reply, payload) => {
+  reply.header('Access-Control-Allow-Origin', '*');
+  reply.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  reply.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  return payload;
+});
+
 
 app.get("/", async () => {
   return { message: "API Encurtador de Links funcionando!" };
