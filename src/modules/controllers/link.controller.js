@@ -26,13 +26,16 @@ export class LinkController {
 
   async createLink(request, reply) {
     const { urlOriginal, legenda } = request.body;
+    console.log("Criando link:", { urlOriginal, legenda });
 
     if (!this.isValidUrl(urlOriginal)) {
       return reply.code(400).send({ message: "URL inválida. Use um formato válido" });
     }
+    console.log("URL válida:", urlOriginal);
 
     try {
       const novoLink = await this.service.createLink({ urlOriginal, legenda });
+      console.log("Link criado:", novoLink);
 
       // Adiciona domínio do seu servidor
       const dominio = "https://encurtador-url-frontend-dun.vercel.app/"; 
